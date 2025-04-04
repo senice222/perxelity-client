@@ -188,7 +188,9 @@ function ResponseViewer() {
 
           {response.citations?.length > 0 && (
             <div>
-              <h2 className="text-lg font-semibold mb-2">📚 Sources:</h2>
+              <h2 style={{
+                color: 'black'
+              }} className="text-lg font-semibold mb-2">📚 Sources:</h2>
               <ul className="list-none">
                 {response.citations.map((citation, index) => (
                   <li key={index} className="mb-2">
