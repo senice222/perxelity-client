@@ -153,20 +153,22 @@ function ResponseViewer() {
               onClick={copyToClipboard}
               className="copy-button"
               style={{
-                backgroundColor: "var(--tg-theme-button-color)",
-                color: "var(--tg-theme-button-text-color)",
-                padding: "8px 16px",
-                borderRadius: "8px",
+                backgroundColor: "#2196F3",
+                color: "white",
+                padding: "10px 16px",
+                borderRadius: "4px",
                 border: "none",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "14px",
+                fontSize: "16px",
                 fontWeight: "500",
+                width: "100%",
+                textAlign: "center"
               }}
             >
-              {copySuccess ? "✅ Скопировано" : "📋 Скопировать"}
+              {copySuccess ? "✅ Скопировано" : "Copy / Скопировать"}
             </button>
           </div>
 
@@ -195,17 +197,14 @@ function ResponseViewer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ 
-                        color: "var(--tg-theme-button-color)",
-                        backgroundColor: "rgba(var(--tg-theme-bg-color-rgb, 255, 255, 255), 0.1)",
-                        padding: "4px 8px",
-                        borderRadius: "4px",
-                        display: "inline-flex",
-                        alignItems: "center"
+                        color: "black",
+                        display: "block",
+                        padding: "4px 0",
+                        textDecoration: "underline"
                       }}
                       className="citation-link hover:opacity-80"
                     >
-                      <span className="mr-2">🔗</span>
-                      <span>Source {index + 1}</span>
+                      {index + 1}. {citation}
                     </a>
                   </li>
                 ))}
