@@ -8,11 +8,32 @@ import LZString from "lz-string"
 function ResponseViewer() {
   const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [copySuccess, setCopySuccess] = useState(false)
   const webApp = window.Telegram.WebApp
 
   // Функция для удаления экранирования
   const removeEscapes = (text) => {
     return text.replace(/\\([_*[\]()~`>#+=|{}.!-])/g, "$1")
+  }
+
+  // Функция для копирования текста ответа
+  const copyToClipboard = () => {
+    // Создаем текстовую версию ответа без markdown-разметки
+    const plainText = response.answer
+      .replace(/\[\\?\[(\d+)\\?\]\]\([^)]+\)/g, '[$1]') // Заменяем markdown-ссылки на [N]
+      .replace(/\\\*/g, '*') // Заменяем экранированные звездочки
+      .replace(/\\_/g, '_') // Заменяем экранированные подчеркивания
+      .replace(/\\([[\]()~`>#+=|{}.!-])/g, '$1') // Убираем другие экранирования
+
+    navigator.clipboard.writeText(plainText).then(
+      () => {
+        setCopySuccess(true)
+        setTimeout(() => setCopySuccess(false), 2000)
+      },
+      (err) => {
+        console.error('Не удалось скопировать текст: ', err)
+      }
+    )
   }
 
   useEffect(() => {
@@ -98,11 +119,55 @@ function ResponseViewer() {
                       </code>
                     )
                   },
+                  a({ node, href, children, ...props }) {
+                    // Проверяем, является ли это ссылкой на источник
+                    const isSourceLink = /\[\d+\]/.test(String(children));
+                    
+                    return (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-link ${isSourceLink ? 'source-link' : ''}`}
+                        style={{
+                          color: "black",
+                          textDecoration: "underline",
+                          fontWeight: isSourceLink ? "bold" : "normal"
+                        }}
+                        {...props}
+                      >
+                        {children}
+                      </a>
+                    );
+                  }
                 }}
               >
                 {response.answer}
               </ReactMarkdown>
             </div>
+          </div>
+
+          {/* Кнопка "Скопировать" */}
+          <div className="mb-4 mt-2">
+            <button
+              onClick={copyToClipboard}
+              className="copy-button"
+              style={{
+                backgroundColor: "var(--tg-theme-button-color)",
+                color: "var(--tg-theme-button-text-color)",
+                padding: "8px 16px",
+                borderRadius: "8px",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "14px",
+                fontWeight: "500",
+              }}
+            >
+              {copySuccess ? "✅ Скопировано" : "📋 Скопировать"}
+            </button>
           </div>
 
           {response.reasoningSteps?.length > 0 && (
@@ -129,7 +194,14 @@ function ResponseViewer() {
                       href={citation}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "var(--tg-theme-button-color)" }}
+                      style={{ 
+                        color: "var(--tg-theme-button-color)",
+                        backgroundColor: "rgba(var(--tg-theme-bg-color-rgb, 255, 255, 255), 0.1)",
+                        padding: "4px 8px",
+                        borderRadius: "4px",
+                        display: "inline-flex",
+                        alignItems: "center"
+                      }}
                       className="citation-link hover:opacity-80"
                     >
                       <span className="mr-2">🔗</span>
