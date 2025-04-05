@@ -202,9 +202,14 @@ function ResponseViewer() {
                         color: "black",
                         display: "block",
                         padding: "4px 0",
-                        textDecoration: "underline"
+                        textDecoration: "underline",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "100%"
                       }}
                       className="citation-link hover:opacity-80"
+                      title={citation}
                     >
                       {index + 1}. {citation}
                     </a>
