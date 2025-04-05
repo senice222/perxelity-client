@@ -206,12 +206,13 @@ function ResponseViewer() {
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
-                        maxWidth: "100%"
+                        maxWidth: "100%",
+                        wordBreak: "break-all"
                       }}
                       className="citation-link hover:opacity-80"
                       title={citation}
                     >
-                      {index + 1}. {citation}
+                      {index + 1}. {formatUrl(citation)}
                     </a>
                   </li>
                 ))}
@@ -226,6 +227,31 @@ function ResponseViewer() {
 
 function App() {
   return <ResponseViewer />
+}
+
+// Добавляем функцию для форматирования URL
+function formatUrl(url) {
+  try {
+    // Создаем объект URL для разбора адреса
+    const urlObj = new URL(url);
+    // Убираем протокол, www и оставляем только домен и путь
+    let domain = urlObj.hostname.replace(/^www\./, '');
+    
+    // Форматируем путь
+    let path = urlObj.pathname;
+    if (path.length > 20) {
+      path = path.substring(0, 15) + '...';
+    }
+    
+    // Возвращаем более компактное представление URL
+    return `${domain}${path === '/' ? '' : path}`;
+  } catch (e) {
+    // Если что-то не так с URL, возвращаем его в обрезанном виде
+    if (url.length > 40) {
+      return url.substring(0, 37) + '...';
+    }
+    return url;
+  }
 }
 
 export default App
