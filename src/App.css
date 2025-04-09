@@ -14,7 +14,9 @@
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -196,13 +198,13 @@ a:hover {
 }
 
 .markdown-content p {
-  margin-bottom: 1em;
+  margin-bottom: 1.2em;
 }
 
 .markdown-content ul,
 .markdown-content ol {
   margin-bottom: 1em;
-  padding-left: 1.5em;
+  /* padding-left: 1.5em; */
 }
 
 .markdown-content li {
@@ -297,13 +299,8 @@ pre::-webkit-scrollbar-track {
 
 /* Reasoning steps and citations */
 .reasoning-step {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-  padding: 0.5rem;
-  border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.02);
-  transition: background-color var(--transition-speed) ease;
+  margin-bottom: 12px;
+  line-height: 1.5;
 }
 
 .dark .reasoning-step {
@@ -319,11 +316,7 @@ pre::-webkit-scrollbar-track {
 }
 
 .citation-link {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-  border-radius: 6px;
-  transition: background-color var(--transition-speed) ease;
+  transition: opacity 0.2s;
 }
 
 .citation-link:hover {
@@ -332,6 +325,13 @@ pre::-webkit-scrollbar-track {
 
 .dark .citation-link:hover {
   background-color: rgba(255, 255, 255, 0.08);
+}
+
+.source-link {
+  color: #007bff !important;
+  background-color: rgba(0, 123, 255, 0.1);
+  padding: 1px 3px;
+  border-radius: 3px;
 }
 
 /* Responsive adjustments */
@@ -353,16 +353,14 @@ pre::-webkit-scrollbar-track {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Dark mode adjustments */
@@ -373,6 +371,144 @@ pre::-webkit-scrollbar-track {
 
   body:not([data-theme="light"]) {
     color-scheme: dark;
+  }
+}
+
+/* Улучшенный вид для математических выражений */
+.markdown-content {
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 0 15px;
+}
+
+/* KaTeX формулы */
+.katex {
+  font-size: 1.1em !important;
+  line-height: 1.5 !important;
+  margin: 0.1em 0 !important;
+}
+
+.katex-display {
+  margin: 1.5em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+  text-align: center !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Улучшенный вид для заголовков и абзацев */
+.markdown-content p {
+  margin-bottom: 1.5em;
+  line-height: 1.8;
+}
+
+.markdown-content strong,
+.markdown-content b {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #333;
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 10px 12px;
+  border-radius: 4px;
+  border-left: 3px solid #007bff;
+}
+
+/* Стили для улучшения читаемости математических выражений */
+.katex-html {
+  padding: 4px 0;
+}
+
+/* Отступы для списков с математическими формулами */
+.markdown-content ol,
+.markdown-content ul {
+  margin-bottom: 1.5em;
+  /* padding-left: 2em; */
+}
+
+.markdown-content li {
+  margin-bottom: 1em;
+}
+
+/* Центрирование формул внутри абзацев */
+.markdown-content p:has(.katex-display) {
+  text-align: center;
+  margin: 2em 0;
+}
+
+/* Правильное отображение длинных математических формул */
+.katex-display > .katex {
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: initial;
+  padding: 4px 10px 4px 0; /* Добавлен вертикальный отступ */
+}
+
+/* Улучшаем прокрутку для длинных формул */
+.katex-display > .katex > .katex-html {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 8px; /* Увеличен отступ для полосы прокрутки */
+}
+
+/* Улучшенное отображение дробей */
+.katex .vlist-t2 {
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+}
+
+/* Отступы между последовательными формулами */
+.katex-display + .katex-display {
+  margin-top: 0 !important;
+  border-top: none;
+}
+
+/* Улучшение читаемости инлайновых формул */
+.katex-inline {
+  margin: 0 0.2em !important;
+  vertical-align: -0.5ex;
+}
+
+/* Стили для отображения структуры шагов решения */
+.markdown-content p:has(strong:first-child) + p {
+  margin-top: 0;
+}
+
+/* Стили для корректного отображения многострочных формул */
+.katex-display .katex .base {
+  margin: 4px 0;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .markdown-content {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+  
+  .katex {
+    font-size: 1em !important;
+  }
+  
+  .markdown-content strong,
+  .markdown-content b {
+    font-size: 1em;
+    padding: 8px 10px;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+  }
+  
+  .katex-display {
+    padding: 6px 0;
+    margin: 1.2em 0 !important;
+    font-size: 0.9em !important;
   }
 }
 
