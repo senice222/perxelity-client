@@ -212,8 +212,8 @@ a:hover {
 }
 
 .markdown-content blockquote {
-  border-left: 4px solid var(--tg-theme-button-color, #3390ec);
-  padding-left: 1em;
+  /* border-left: 4px solid var(--tg-theme-button-color, #3390ec); */
+  /* padding-left: 1em; */
   margin-left: 0;
   margin-right: 0;
   font-style: italic;
@@ -328,10 +328,10 @@ pre::-webkit-scrollbar-track {
 }
 
 .source-link {
-  color: #007bff !important;
-  background-color: rgba(0, 123, 255, 0.1);
-  padding: 1px 3px;
-  border-radius: 3px;
+  /* color: #007bff !important; */
+  /* background-color: rgba(0, 123, 255, 0.1); */
+  /* padding: 1px 3px; */
+  /* border-radius: 3px; */
 }
 
 /* Responsive adjustments */
@@ -378,7 +378,7 @@ pre::-webkit-scrollbar-track {
 .markdown-content {
   font-size: 16px;
   line-height: 1.6;
-  padding: 0 15px;
+  /* padding: 0 15px; */
 }
 
 /* KaTeX формулы */
@@ -410,12 +410,12 @@ pre::-webkit-scrollbar-track {
   font-size: 1.1em;
   color: #333;
   display: block;
-  margin-top: 2em;
-  margin-bottom: 1em;
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 10px 12px;
+  /* margin-top: 2em; */
+  /* margin-bottom: 1em; */
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  /* padding: 10px 12px; */
   border-radius: 4px;
-  border-left: 3px solid #007bff;
+  /* border-left: 3px solid #007bff; */
 }
 
 /* Стили для улучшения читаемости математических выражений */
@@ -490,7 +490,7 @@ pre::-webkit-scrollbar-track {
 @media (max-width: 768px) {
   .markdown-content {
     font-size: 14px;
-    padding: 0 10px;
+    /* padding: 0 10px; */
   }
   
   .katex {
@@ -500,9 +500,9 @@ pre::-webkit-scrollbar-track {
   .markdown-content strong,
   .markdown-content b {
     font-size: 1em;
-    padding: 8px 10px;
-    margin-top: 1.5em;
-    margin-bottom: 0.8em;
+    /* padding: 8px 10px; */
+    /* margin-top: 1.5em; */
+    /* margin-bottom: 0.8em; */
   }
   
   .katex-display {
